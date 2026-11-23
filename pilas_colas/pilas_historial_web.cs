@@ -6,11 +6,11 @@
     // push - Apila un elemento a la pila.
     // pop - desapila un elemento.
     // peek - Nos da el primer elemento de la pila pero no lo desapila.
-    public static class pilas_historial_web
+    public static class pilas_historial
     {
         static Stack<string> history;
 
-        static public void next_page()
+        static public void AddPage()
         {
             Console.WriteLine("Introduzca el nombre de la pagina para visitarla: ");
 
@@ -52,15 +52,38 @@
 
                     return;
                 }
+                else
+                {
+                    string actual_page = history.Peek();
+
+                    Console.WriteLine("Pagina Actual: " + actual_page);
+
+                    return;
+                }
             }
             else
             {
-
+                Console.WriteLine("Visita a paginas web para poder navegar entre distintas paginas del historial.");
             }
+        }
 
-            string actual_page = history.Peek();
+        static public void VerHistorial()
+        {
+            Stack<string> clone_pila = history;
 
-            Console.WriteLine("Pagina Actual: " + actual_page);
+            try
+            {
+                Console.WriteLine("Historial:");
+                while(clone_pila.Count > 0)
+                {
+                    Console.WriteLine(clone_pila.Pop());
+                }
+                Console.WriteLine("Completado");
+            }
+            catch (InvalidOperationException e)
+            {
+                Console.WriteLine("La pila esta vacia");
+            }
         }
     }
 }
